@@ -21,4 +21,5 @@ public class RegistrationInfo {
 		this.lastName = lastName;
 	}
 	
+	
 }
