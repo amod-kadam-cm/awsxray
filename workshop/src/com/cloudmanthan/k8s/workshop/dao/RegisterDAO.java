@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.amazonaws.xray.AWSXRay;
-import com.amazonaws.xray.entities.Subsegment;
 import com.cloudmanthan.k8s.workshop.model.RegistrationInfo;
 
 public class RegisterDAO {
@@ -18,13 +16,9 @@ public class RegisterDAO {
 
 	public boolean register(RegistrationInfo regInfo) {
 		
-		// Wrap in subsegment
-	    Subsegment subsegment = AWSXRay.beginSubsegment("## RegisterDAO.register");
 		boolean success = false;
 
 		logger.log(Level.INFO, regInfo.toString());
-		
-		AWSXRay.getCurrentSegment().putAnnotation("firstname", regInfo.getFirstName());
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -51,20 +45,10 @@ public class RegisterDAO {
 			con.close();
 
 		} catch (Exception e) {
-			subsegment.addException(e);
 			System.out.println(e);
 			logger.log(Level.SEVERE, e.getMessage());
 			
-		}finally {
-		      AWSXRay.endSubsegment();
-	    }
-		logger.log(Level.INFO, "Sending Message");
-		
-		SendSNSNotification.sendMessage(regInfo);
-		logger.log(Level.INFO, "Message Sen");
-			
-		
-		
+		}
 		
 		return  success ;
 
