@@ -3,8 +3,6 @@ package com.cloudmanthan.k8s.workshop.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,14 +39,24 @@ public class RegisterDAO {
 			int i = stmt.executeUpdate();
 			System.out.println(i + " records inserted");
 
-			success = true ;
 			con.close();
+			
+			// send message to q as well
+			SQSFifo sqsFifo = new SQSFifo();
+			
+			sqsFifo.sendMessage(regInfo);
+			
+			success = true ;
+			
 
 		} catch (Exception e) {
 			System.out.println(e);
 			logger.log(Level.SEVERE, e.getMessage());
 			
+			
 		}
+		
+		
 		
 		return  success ;
 
