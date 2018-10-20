@@ -48,6 +48,9 @@ public class RegisterDAO {
 			
 			success = true ;
 			
+		
+			sqsFifo.recieveMessage();
+			
 
 		} catch (Exception e) {
 			System.out.println(e);
