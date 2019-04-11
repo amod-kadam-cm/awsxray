@@ -11,8 +11,10 @@ public class SendSNSNotification {
 		AmazonSNS snsClient = AmazonSNSClientBuilder.defaultClient();
 		
 		String message = "First Name " + regInfo.getFirstName() + "Last Name : " + regInfo.getLastName() ;
-		String topicArn = "arn:aws:sns:us-east-1:297106433303:AMOD_TOPIC";
- 		snsClient.publish(topicArn, message);
+		
+		String SNS_TOPIC_ARN = System.getenv("SNS_TOPIC_ARN");
+		//String topicArn = "arn:aws:sns:us-east-1:297106433303:AMOD_TOPIC";
+ 		snsClient.publish(SNS_TOPIC_ARN, message);
  		
  		
 		
