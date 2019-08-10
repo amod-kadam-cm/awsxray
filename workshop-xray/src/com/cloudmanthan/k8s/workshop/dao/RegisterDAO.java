@@ -36,7 +36,7 @@ public class RegisterDAO {
 
 		logger.log(Level.INFO, regInfo.toString());
 		
-		AWSXRay.getCurrentSegment().putAnnotation("firstname", regInfo.getFirstName());
+	    AWSXRay.getCurrentSegment().putAnnotation("firstname", regInfo.getFirstName());
 		
 		try {
 			
