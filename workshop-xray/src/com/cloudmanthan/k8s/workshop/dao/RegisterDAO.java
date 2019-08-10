@@ -70,8 +70,7 @@ public class RegisterDAO {
 		SendSNSNotification.sendMessage(regInfo);
 		logger.log(Level.INFO, "Message Sent");
 			
-		
-		
+	
 		
 		return  success ;
 
