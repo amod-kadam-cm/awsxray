@@ -1,11 +1,9 @@
 package com.cloudmanthan.k8s.workshop.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.cloudmanthan.aws.workshop.dao.RegistrationDynamoDAO;
 import com.cloudmanthan.k8s.workshop.model.RegistrationInfo;
 
 public class RegisterDAO {
@@ -42,10 +40,18 @@ public class RegisterDAO {
 			 * con.close();
 			 * 
 			 */
-			// send message to standard as well
+			// send message to standard queue as well
 			SQSStandard sqsStandard = new SQSStandard();
 
 			sqsStandard.sendMessage(regInfo);
+			
+			
+			// insert records in DynamoDB 
+			
+			RegistrationDynamoDAO regDynamoDAO = new RegistrationDynamoDAO();
+					
+			regDynamoDAO.register(regInfo);
+			
 
 			success = true;
 
