@@ -17,12 +17,12 @@ import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.cloudmanthan.k8s.workshop.model.RegistrationInfo;
 
-public class SQSFifo {
+public class SQSStandard {
 
 	AmazonSQS sqsClient = AmazonSQSClientBuilder.defaultClient();
 
 	Logger logger = Logger.getLogger(this.getClass().getName());
-	String queueUrl  = System.getenv("FIFO_Q_URL");
+	String queueUrl  = System.getenv("STANDARD_Q_URL");
 	
 	
 	public void sendMessage(RegistrationInfo regInfo) {
@@ -31,8 +31,7 @@ public class SQSFifo {
 		
 		
 		logger.log(Level.INFO, "Sending a message to ");
-		final SendMessageRequest sendMessageRequest = new SendMessageRequest(queueUrl, message)
-				.withMessageGroupId("regapp").withMessageDeduplicationId(UUID.randomUUID().toString());
+		final SendMessageRequest sendMessageRequest = new SendMessageRequest(queueUrl, message);
 
 		sqsClient.sendMessage(sendMessageRequest);
 
