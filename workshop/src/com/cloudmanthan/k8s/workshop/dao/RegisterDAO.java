@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.cloudmanthan.aws.workshop.dao.RegistrationDynamoDAO;
+import com.cloudmanthan.aws.workshop.service.SNSNotificationService;
 import com.cloudmanthan.k8s.workshop.model.RegistrationInfo;
 
 public class RegisterDAO {
@@ -52,10 +53,15 @@ public class RegisterDAO {
 					
 			regDynamoDAO.register(regInfo);
 			
+			// send the message to SNS topic as well
+			logger.log(Level.INFO, "Publishing message to SNS topic");
+			SNSNotificationService.sendMessage(regInfo);
+			
 
 			success = true;
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(e);
 			logger.log(Level.SEVERE, e.getMessage());
 
