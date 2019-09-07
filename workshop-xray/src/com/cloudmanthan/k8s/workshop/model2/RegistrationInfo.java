@@ -1,4 +1,4 @@
-package com.cloudmanthan.k8s.workshop.model;
+package com.cloudmanthan.k8s.workshop.model2;
 
 public class RegistrationInfo {
 

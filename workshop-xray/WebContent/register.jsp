@@ -2,9 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="regInfoDAO"
-	class="com.cloudmanthan.k8s.workshop.dao.RegisterDAO" />
+	class="com.cloudmanthan.k8s.workshop.dao2.RegisterDAO" />
 <jsp:useBean id="regInfo"
-	class="com.cloudmanthan.k8s.workshop.model.RegistrationInfo" />
+	class="com.cloudmanthan.k8s.workshop.model2.RegistrationInfo" />
 <jsp:setProperty property="*" name="regInfo" />
 
 

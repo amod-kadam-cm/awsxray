@@ -1,4 +1,4 @@
-package com.cloudmanthan.k8s.workshop.dao;
+package com.cloudmanthan.k8s.workshop.dao2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,8 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Subsegment;
-import com.cloudmanthan.k8s.workshop.model.RegistrationInfo;
+import com.cloudmanthan.aws.workshop.service2.SendSNSNotification;
+import com.cloudmanthan.k8s.workshop.model2.RegistrationInfo;
 
 public class RegisterDAO {
 
@@ -27,7 +28,7 @@ public class RegisterDAO {
 	String driverClassName = "com.mysql.jdbc.Driver";
 	String conString = "jdbc:mysql://" + db_host + ":" + db_port + "/" + db_name ;
 
-
+	
 	public boolean register(RegistrationInfo regInfo) {
 		
 		// Wrap in subsegment
@@ -40,7 +41,7 @@ public class RegisterDAO {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 			
 			logger.log(Level.INFO, conString);
 			//Connection con = DriverManager.getConnection(conString, db_user, db_password);
